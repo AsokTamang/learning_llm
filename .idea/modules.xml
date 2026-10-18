@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/llm.iml" filepath="$PROJECT_DIR$/.idea/llm.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/nlp.iml" filepath="$PROJECT_DIR$/.idea/nlp.iml" />
+>>>>>>> 42552ac7996688323fab5ddda5b924295c31ef2c
     </modules>
   </component>
 </project>
