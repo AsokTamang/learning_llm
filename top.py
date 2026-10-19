@@ -1,6 +1,10 @@
+from groq import Groq
+import os
+from dotenv import load_dotenv
+load_dotenv()
 #logic of top k and top p sampling in next word prediction
 scores = {"mat": 4.0, "floor": 3.1, "sofa": 2.6, "roof": 1.2, "moon": -1.5}
-
+#USING MATHMATICAL FORMULA FOR TOP K AND TOP P SAMPLING
 import math
 def softmax(scores):
     exp_scores ={word:math.exp(score) for word, score in scores.items()}
@@ -17,3 +21,17 @@ for word in sorted_scores:
     kept.append(word)
     total+=probabilities[word]
 print(f"Top p sampling: {kept} with total probability: {total}")    
+
+
+#USING GROQ API FOR TOP K AND TOP P SAMPLING
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))  
+#USING VARIOUS PROBABILITIES FOR TOP P SAMPLING
+for top_p in [0.5,0.7,0.8]: 
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-120b",
+        messages=[{"role": "user", "content": "Suggest a name for a cafe. Reply with the name only."}],
+        top_p=top_p,
+        temperature=0.9,
+    )
+    print(f"Top p: {top_p}")
+    print(f"Response: {response.choices[0].message.content}\n")
