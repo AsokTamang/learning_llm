@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # made-up scores for the word after "The cat sat on the"
 scores = {"mat": 4.0, "floor": 3.1, "sofa": 2.6, "roof": 1.2, "moon": -1.5}
 
@@ -28,3 +31,17 @@ while complete_sentence[-1] in next_word:
     next_word_choice = max(options, key=options.get)  #choosing the next word with the highest probability
     complete_sentence.append(next_word_choice)  #adding the likely next word to the list of sentence
 print(" ".join(complete_sentence))  
+
+
+#text generation using groq
+from groq import Groq
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))  #using the Groq client to interact with the API
+stream = client.chat.completions.create(
+    model="openai/gpt-oss-120b",
+    messages=[{"role": "user", "content": "Write a short story about a robot learning to love."}],
+    stream=True,
+)
+for chunk in stream:
+    print(chunk.choices[0].delta.content)
+print()
+
