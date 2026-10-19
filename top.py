@@ -35,3 +35,8 @@ for top_p in [0.5,0.7,0.8]:
     )
     print(f"Top p: {top_p}")
     print(f"Response: {response.choices[0].message.content}\n")
+
+
+for model in client.models.list().data:
+    if model.id == "openai/gpt-oss-120b":
+        print(model.supported_sampling_parameters)    
