@@ -10,6 +10,7 @@ def softmax(scores):
     total = sum(exp_scores.values())  #total sum of the exponential scores of all the words(tokens)
     return {word:exp_score/total for word, exp_score in exp_scores.items()} 
 
+#USE OF TEMPERATURE IN NEXT WORD PREDICTION USING MATHMATICAL FORMULA
 temperatures = [0.2, 0.5, 0.8]
 final = {}
 for temp in temperatures:
@@ -17,7 +18,9 @@ for temp in temperatures:
     next_token_probabilities = softmax(scaled_scores)
     final[temp] = next_token_probabilities
 print(final)    
-    
+
+
+#USE OF TEMPERATURE IN TEXT GENERATION BY GROQ API 
 from groq import Groq
 client = Groq(api_key=os.getenv("GROQ_API_KEY")) 
 prompt = [{"role": "user", "content": "Suggest a name for a cafe. Reply with the name only."}]
