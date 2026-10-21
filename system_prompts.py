@@ -21,12 +21,35 @@ tickets = [
     ("I want to cancel my order before it ships", "other"),
 ]
 
-
+#EXPERIMENTING WITH VAGUE PROMPT
 vague = "Sort this support ticket into billing, shipping or other and give it a priority."
 for ticket, category in tickets:
     prompt = [{
         'role':'system',
         'content':vague
+    },{
+        'role':'user',
+        'content':ticket
+    }]
+    print('expected:',category, 'actual:',ask(prompt))
+
+
+#EXPERIMENTING WITH STRUCTURED PROMPT
+structured = """You sort customer support tickets for an online shop.
+
+Categories:
+- billing: payments, charges, refunds
+- shipping: parcels, delivery, damaged boxes
+- other: anything else
+
+Reply with one line of JSON and nothing else, like this:
+{"category": "shipping", "priority": 3}
+priority is 1 (can wait) to 5 (urgent)."""
+
+for ticket, category in tickets:
+    prompt = [{
+        'role':'system',
+        'content':structured
     },{
         'role':'user',
         'content':ticket
