@@ -25,7 +25,7 @@ print(f"Top p sampling: {kept} with total probability: {total}")
 
 #USING GROQ API FOR TOP K AND TOP P SAMPLING
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))  
-#USING VARIOUS PROBABILITIES FOR TOP P SAMPLING
+#USING VARIOUS PROBABILITIES FOR TOP P SAMPLING AND WE ARE USING A HIGH TEMPERATURE OF 0.9 TO GET DIVERSE OUTPUT
 for top_p in [0.5,0.7,0.8]: 
     response = client.chat.completions.create(
         model="openai/gpt-oss-120b",
