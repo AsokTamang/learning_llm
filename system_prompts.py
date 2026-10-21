@@ -43,8 +43,8 @@ Categories:
 - other: anything else
 
 Reply with one line of JSON and nothing else, like this:
-{"category": "shipping"}
-"""
+{"category": "shipping", "priority": 3}
+priority is 1 (can wait) to 5 (urgent)."""
 
 for ticket, category in tickets:
     prompt = [{
@@ -57,25 +57,3 @@ for ticket, category in tickets:
     print('expected:',category, 'actual:',ask(prompt))
 
 
-#LOGIC OF FEW-SHOT PROMPTING
-examples = {
-    'role':'user','content':'you took money from my account without permission',
-    'role':'assistant','content':'{"category": "billing","priority": "high"}',
-    'role':'user','content':'Where is my delivery? It is a week late',
-    'role':'assistant','content':'{"category": "shipping","priority": "high"}',
-    'role':'user','content':'Can I change the email on my account?',
-    'role':'assistant','content':'{"category": "other","priority": "high"}',
-}    
-
-#FEW-SHOT PROMPTING
-for ticket, category in tickets:
-    prompt = [{
-        'role':'system',
-        'content':structured
-    },
-    examples
-    ,{
-        'role':'user',
-        'content':ticket
-    }]
-    print('expected:',category, 'actual:',ask(prompt))
