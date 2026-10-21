@@ -30,7 +30,7 @@ tickets = [
     ("How do I change my password?", "other"),
     ("The parcel arrived but the box was crushed", "shipping"),
     ("The courier asked me to pay a delivery fee at the door", "billing"),
-    ("I want to cancel my order before it ships", "other"),
+    ("I want to stop my subscription", "billing"),
 ]
 
 #LOGIC OF FEW-SHOT PROMPTING
@@ -41,6 +41,9 @@ examples = {
     'role':'assistant','content':'{"category": "shipping","priority": "high"}',
     'role':'user','content':'Can I change the email on my account?',
     'role':'assistant','content':'{"category": "other","priority": "high"}',
+    'role':'user','content':'Can I make payment?',
+    'role':'assistant','content':'{"category": "billing","priority": "high"}',
+        
 }    
 
 #FEW-SHOT PROMPTING
