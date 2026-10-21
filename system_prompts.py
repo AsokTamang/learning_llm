@@ -22,14 +22,14 @@ tickets = [
 ]
 
 #EXPERIMENTING WITH VAGUE PROMPT
-vague = "Sort this support ticket into billing, shipping or other and give it a priority."
+vague = "Sort this support ticket into billing, shipping or other and give it aaa priority."
 for ticket, category in tickets:
     prompt = [{
         'role':'system',
         'content':vague
     },{
         'role':'user',
-        'content':ticket
+        'content':ticket  #here we are passing the info of tickets as the user message
     }]
     print('expected:',category, 'actual:',ask(prompt))
 
@@ -43,8 +43,8 @@ Categories:
 - other: anything else
 
 Reply with one line of JSON and nothing else, like this:
-{"category": "shipping", "priority": 3}
-priority is 1 (can wait) to 5 (urgent)."""
+{"category": "shipping"}
+"""
 
 for ticket, category in tickets:
     prompt = [{
