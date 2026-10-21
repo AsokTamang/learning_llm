@@ -23,3 +23,14 @@ response = client.chat.completions.create(
     messages=history
 )
 print(response.choices[0].message.content)
+
+import tiktoken
+encoding = tiktoken.get_encoding('o200k_harmony')
+text = 'What is enlightenment?'
+response = client.chat.completions.create(
+    model="openai/gpt-oss-120b",
+    messages=[{'role':'user','content':text}],
+    temperature=0.7
+)
+print(len(encoding.encode(text)),'token in text')
+print('Total number of tokens used in the conversation:',response.usage.prompt_tokens) 
