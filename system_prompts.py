@@ -22,7 +22,7 @@ tickets = [
 ]
 
 #EXPERIMENTING WITH VAGUE PROMPT
-vague = "Sort this support ticket into billing, shipping or other and give it aaa priority."
+vague = "Sort this support ticket into billing, shipping or other and give it a priority."
 for ticket, category in tickets:
     prompt = [{
         'role':'system',
@@ -51,6 +51,30 @@ for ticket, category in tickets:
         'role':'system',
         'content':structured
     },{
+        'role':'user',
+        'content':ticket
+    }]
+    print('expected:',category, 'actual:',ask(prompt))
+
+
+#LOGIC OF FEW-SHOT PROMPTING
+examples = {
+    'role':'user','content':'you took money from my account without permission',
+    'role':'assistant','content':'{"category": "billing","priority": "high"}',
+    'role':'user','content':'Where is my delivery? It is a week late',
+    'role':'assistant','content':'{"category": "shipping","priority": "high"}',
+    'role':'user','content':'Can I change the email on my account?',
+    'role':'assistant','content':'{"category": "other","priority": "high"}',
+}    
+
+#FEW-SHOT PROMPTING
+for ticket, category in tickets:
+    prompt = [{
+        'role':'system',
+        'content':structured
+    },
+    examples
+    ,{
         'role':'user',
         'content':ticket
     }]
