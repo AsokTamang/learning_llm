@@ -34,3 +34,12 @@ response = client.chat.completions.create(
 )
 print(len(encoding.encode(text)),'token in text')
 print('Total number of tokens used in the conversation:',response.usage.prompt_tokens) 
+#helper function to chat with llm
+def ask(messages,**settings):
+    response = client.chat.completions.create(
+        model ="openai/gpt-oss-120b",
+        messages = messages,
+        **settings
+    )
+    return response.choices[0].message.content
+
