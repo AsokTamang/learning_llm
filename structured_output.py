@@ -75,4 +75,12 @@ for ticket,category in tickets:
     }] 
     print(check(ask(prompt)))  
 
-
+print('After this, checking with vague prompt')
+#checking the output using vague prompt
+for ticket,category in tickets:
+    prompt = [{
+        'role':'system','content':vague},
+        examples,  #few-shot-prompting
+        {'role':'user','content':ticket
+    }] 
+    print(check(ask(prompt)))
