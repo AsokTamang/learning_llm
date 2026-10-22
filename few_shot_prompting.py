@@ -10,7 +10,7 @@ def ask(messages,**settings):
         messages = messages,
         **settings
     )
-    return response.choices[0].message.content
+    return response.choices[0].message.content  
 
 structured = """You sort customer support tickets for an online shop.
 
@@ -21,6 +21,7 @@ Categories:
 
 Reply with one line of JSON and nothing else, like this:
 {"category": "shipping"}
+priority is 1 (can wait) to 5 (urgent)
 """
 
 tickets = [
@@ -46,7 +47,7 @@ examples = {
         
 }    
 
-#FEW-SHOT PROMPTING
+#herre we are using FEW-SHOT PROMPTING logic to provide some examples to LLM for better decision making.
 for ticket, category in tickets:
     prompt = [{
         'role':'system',
