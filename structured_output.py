@@ -11,7 +11,7 @@ class structured_output(BaseModel):
     priority:int = Field(ge = 1, le = 5)  #here the priority can be from 1 to 5, 
 
 
-#check function
+#function to check the structure of an output
 def check(answer):
     try:
         return structured_output.model_validate_json(answer)  #checking the structure of an output
@@ -20,9 +20,12 @@ def check(answer):
     
 
 print(check('{"category":"other","priority":5}'))  #passing the correct input 
-print(check('{"category":"other","priority":8}'))  #passing the wrong output
+print(check('{"category":"other","priority":8}'))  #passing the wrong output as the priority is greater than 5
+
+
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+#function to have conversation with LLM
 def ask(messages,**settings):
     response = client.chat.completions.create(
         model ="openai/gpt-oss-120b",
@@ -77,6 +80,8 @@ for ticket,category in tickets:
     print(check(ask(prompt)))  
 
 print('After this, checking with vague prompt')
+
+
 #checking the output using vague prompt
 for ticket,category in tickets:
     prompt = [{
