@@ -7,8 +7,8 @@ from pydantic import BaseModel, Field, ValidationError
 
 #class for representing the structure of an output
 class structured_output(BaseModel):
-    category: Literal['billing', 'shipping', 'other']
-    priority:int = Field(ge = 1, le = 5)  #here the priority can be from 1 to 5, 
+    category: Literal['billing', 'shipping', 'other']  #category data must be among these values
+    priority:int = Field(ge = 1, le = 5)  #here the priority can be from 1 to 5,   
 
 
 #function to check the structure of an output
