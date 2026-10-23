@@ -103,6 +103,4 @@ def evaluate_prompt(tickets):
         total_score[content_type] = score/len(tickets)
 
     return total_score
-
-
 print("The evaluation score of prompt is:", evaluate_prompt(tickets))
